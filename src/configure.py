@@ -83,7 +83,7 @@ else:
     cookies = ""
 
 backend_conf_plus = Template("""
-    server $name-$index $host:$port $cookies check $observe
+    server $name-$index $host:$port $cookies check observe $observe
 """)
 
 backend_conf_plus = backend_conf_plus.substitute(
