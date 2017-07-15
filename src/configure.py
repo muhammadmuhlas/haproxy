@@ -83,12 +83,8 @@ else:
     cookies = ""
 
 backend_conf_plus = Template("""
-    server $name-$index $host:$port $cookies check observe $observe
+    server $name-$index $host:$port $cookies check
 """)
-
-backend_conf_plus = backend_conf_plus.substitute(
-    observe=OBSERVE
-)
 
 health_conf = """
 listen default
