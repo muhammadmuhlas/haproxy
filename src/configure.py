@@ -83,7 +83,7 @@ else:
     cookies = ""
 
 backend_conf_plus = Template("""
-    server $name-$index $host:$port $cookies check
+    server $name-$index $host:$port $cookies check observe $observe
 """)
 
 health_conf = """
@@ -192,11 +192,13 @@ elif sys.argv[1] == "hosts":
 
         existing_hosts.add(host_ip)
         host_port = BACKENDS_PORT
+        observe_mode = OBSERVE
         backend_conf += backend_conf_plus.substitute(
                 name='http-server',
                 index=index,
                 host=host_ip,
                 port=host_port,
+                observe=observe_mode,
                 cookies=cookies.replace('@@value@@', host_ip)
         )
         index += 1
