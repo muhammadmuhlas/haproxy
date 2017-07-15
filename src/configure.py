@@ -24,7 +24,6 @@ TIMEOUT_CONNECT = os.environ.get('TIMEOUT_CONNECT', '5000')
 TIMEOUT_CLIENT = os.environ.get('TIMEOUT_CLIENT', '50000')
 TIMEOUT_SERVER = os.environ.get('TIMEOUT_SERVER', '50000')
 HTTPCHK = os.environ.get('HTTPCHK', 'HEAD /')
-OBSERVE = os.environ.get('OBSERVE', 'layer7')
 INTER = os.environ.get('INTER', '2s')
 FAST_INTER = os.environ.get('FAST_INTER', INTER)
 DOWN_INTER = os.environ.get('DOWN_INTER', INTER)
@@ -83,7 +82,7 @@ else:
     cookies = ""
 
 backend_conf_plus = Template("""
-    server $name-$index $host:$port $cookies check observe $observe
+    server $name-$index $host:$port $cookies check observe layer7
 """)
 
 health_conf = """
@@ -192,13 +191,11 @@ elif sys.argv[1] == "hosts":
 
         existing_hosts.add(host_ip)
         host_port = BACKENDS_PORT
-        observe_mode = OBSERVE
         backend_conf += backend_conf_plus.substitute(
                 name='http-server',
                 index=index,
                 host=host_ip,
                 port=host_port,
-                observe=observe_mode,
                 cookies=cookies.replace('@@value@@', host_ip)
         )
         index += 1
