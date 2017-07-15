@@ -1,18 +1,18 @@
 version: "2"
-  services:
-    haproxy:
-      image: muhammadmuhlas/haproxy
-      depends_on:
-        - webapp
-      ports:
-        - "80:5000"
-        - "1936:1936"
-      environment:
-        BACKENDS: "webapp"
-        DNS_ENABLED: "true"
+services:
+  haproxy:
+    image: muhammadmuhlas/haproxy
+    depends_on:
+      - webapp
+    ports:
+      - "80:5000"
+      - "1936:1936"
+    environment:
+      BACKENDS: "webapp"
+      DNS_ENABLED: "true"
 
-    webapp:
-      image: muhammadmuhlas/alpine-nginx-php-fpm
-      volumes:
-        - "./:/var/www/html"
-      restart: always
+  webapp:
+    image: muhammadmuhlas/alpine-nginx-php-fpm
+    volumes:
+      - "./:/var/www/html"
+    restart: always

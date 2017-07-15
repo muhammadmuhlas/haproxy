@@ -61,7 +61,7 @@ if COOKIES_ENABLED:
     http-request set-header X-Forwarded-Port %[dst_port]
     http-request add-header X-Forwarded-Proto https if { ssl_fc }
     option httpchk $httpchk HTTP/1.1\\r\\nHost:localhost
-    option observe $observe
+    observe $observe
     default-server inter $inter fastinter $fastinter downinter $downinter fall $fall rise $rise
     cookie SRV_ID insert
 """)
@@ -78,7 +78,7 @@ else:
     http-request set-header X-Forwarded-Port %[dst_port]
     http-request add-header X-Forwarded-Proto https if { ssl_fc }
     option httpchk $httpchk HTTP/1.1\\r\\nHost:localhost
-    option observe $observe
+    observe $observe
     default-server inter $inter fastinter $fastinter downinter $downinter fall $fall rise $rise
     cookie SRV_ID prefix
 """)
