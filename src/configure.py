@@ -56,6 +56,7 @@ if COOKIES_ENABLED:
   backend $backend
     mode http
     balance $balance
+    maxconn 2000000
     option forwardfor
     http-request set-header X-Forwarded-Port %[dst_port]
     http-request add-header X-Forwarded-Proto https if { ssl_fc }
@@ -72,6 +73,7 @@ else:
   backend $backend
     mode http
     balance $balance
+    maxconn 2000000
     option forwardfor
     http-request set-header X-Forwarded-Port %[dst_port]
     http-request add-header X-Forwarded-Proto https if { ssl_fc }
